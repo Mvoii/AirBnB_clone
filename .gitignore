@@ -1,0 +1,5 @@
+main_1.py
+file_1.json
+*.pyc
+__pycache__/
+.gitingore
