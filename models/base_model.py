@@ -24,9 +24,10 @@ Write a class BaseModel that defines all common attributes/methods for other cla
 
 import json
 from uuid import uuid4
-from datetime import datetime
+from datetime import date, datetime
 
-class BaseModel():
+class BaseModel:
+    """Super class fro all"""
     def __init__(self) -> None:
         self.id = str(uuid4())
         self.created_at = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -36,8 +37,14 @@ class BaseModel():
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
+        """sets updated_at to current datetime"""
         self.updated_at = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         
     def to_dict(self):
-        to_json = self.__dict__
-        to_json["__class__"] = self.__class__.__name__
+        """returns a dictionary containing all keys/values of __dict__ of the instance"""
+        master_dict = self.__dict__
+        
+        master_dict["created_at"] = master_dict["created_at"].isoformat()
+        master_dict["updated_at"] = master_dict["updated_at"].isoformat()
+        master_dict["__class__"] = self.__class__.__name__
+        return master_dict
