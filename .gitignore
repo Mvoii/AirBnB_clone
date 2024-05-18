@@ -1,5 +1,6 @@
-main_1.py
+main_*.py
 file_1.json
 *.pyc
 __pycache__/
 .gitingore
+file_2.json
