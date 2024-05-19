@@ -4,7 +4,6 @@ comments on class
 """
 import uuid
 from datetime import datetime
-import time
 
 class BaseModel:
     """
@@ -41,20 +40,3 @@ class BaseModel:
                             "created_at": self.created_at.isoformat(),
                             "updated_at": self.updated_at.isoformat()})
         return master_dict
-    
-model = BaseModel()
-# model.save()
-# print(model)
-# 
-# time.sleep(5)
-# print("\n after sleep")
-# 
-# model.save()
-# print(model)
-# 
-# json_repr = model.to_dict()
-# print("\n json repr")
-# print(json_repr)
-# print(type(json_repr["created_at"]))
-# print(type(json_repr["updated_at"]))
-
