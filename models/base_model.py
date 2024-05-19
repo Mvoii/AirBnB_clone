@@ -14,7 +14,6 @@ class BaseModel:
         init method
         """
         if kwargs is not None and len(kwargs) != 0:
-            print("in kwargs")
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
