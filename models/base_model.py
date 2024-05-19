@@ -40,15 +40,16 @@ class BaseModel:
         """
         self.updated_at = datetime.now()
         self.__dict__.update({"updated_at": datetime.now()})
+        storage.new(self)
         storage.save()
         
     def to_dict(self):
         """
         returns a dict rep od instances
         """
-        master_dict = self.__dict__
-        master_dict.update({"__class__": self.__class__.__name__,
-                            "id": self.id,
-                            "created_at": self.created_at.isoformat(),
-                            "updated_at": self.updated_at.isoformat()})
+        master_dict = self.__dict__.copy()
+        master_dict.update({'__class__': self.__class__.__name__,
+                            'id': self.id,
+                            'created_at': self.created_at.isoformat(),
+                            'updated_at': self.updated_at.isoformat()})
         return master_dict

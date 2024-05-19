@@ -3,7 +3,8 @@
 serialize to to a json file and deseralizes json to instance
 """
 import json
-from models.base_model import BaseModel
+import os
+#from models.base_model import BaseModel
 
 class FileStorage:
     """
@@ -33,6 +34,7 @@ class FileStorage:
         """
         serializes obj dict to a json file
         """
+        from models.base_model import BaseModel
         objdict = {}
         for key, value in self.__objects.items():
             objdict[key] = value.to_dict()
@@ -46,16 +48,29 @@ class FileStorage:
         """
         deserializes json file to obj dict
         """
-        classlist = {
-            "BaseModel": BaseModel
-        }
-        try:
-            with open(self.__file_path, 'r') as file:
-                self.__objects = json.load(file)
-                for key, value in self.__objects.items():
-                    class_name = value["__class__"]
-                    if class_name in classlist:
-                        self.__objects[key] = classlist[class_name](**value)
+        #from models.base_model import BaseModel
+        #classlist = {
+        #    "BaseModel": BaseModel
+        #}
+        if os.path.exists(self.__file_path):
+            try:
+                with open(self.__file_path, 'r') as file:
+                    self.__objects = json.load(file)
+                    for key, value in self.__objects.items():
+                        cls_name, obj_id = key.split('.')
+                        from models.base_model import BaseModel
+                        cls = BaseModel
+                        self.__objects[key] = cls(**value)
+                        #if class_name in classlist:
+                        #   self.__objects[key] = classlist[class_name](**value)
 
-        except FileNotFoundError:
-            pass
+            except FileNotFoundError:
+                pass
+        #if os.path.exists(self.__file_path):
+        #with open(self.__file_path, 'r') as f:
+        #    obj_dict = json.load(f)
+        #    for key, value in obj_dict.items():
+        #        cls_name, obj_id = key.split('.')
+        #        cls = globals()[cls_name]
+        #        instance = cls(**value)
+        #        self.__objects[key] = instance
