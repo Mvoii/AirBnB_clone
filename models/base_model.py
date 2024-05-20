@@ -26,7 +26,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            from .__init__ import FileStorage
+            from .__init__ import storage
             storage.new(self)
      
     def __str__(self):
@@ -41,7 +41,7 @@ class BaseModel:
         """
         self.updated_at = datetime.now()
         self.__dict__.update({"updated_at": datetime.now()})
-        from .__init__ import FileStorage
+        from .__init__ import storage
         storage.new(self)
         storage.save()
         

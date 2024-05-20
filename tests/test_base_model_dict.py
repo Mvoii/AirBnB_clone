@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+Test suite for base_model dict
+"""
+import unittest
 from models.base_model import BaseModel
 
 my_model = BaseModel()
