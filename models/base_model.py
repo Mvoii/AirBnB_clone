@@ -4,7 +4,7 @@ comments on class
 """
 import uuid
 from datetime import datetime
-from models import storage
+#from .__init__ import storage
 
 class BaseModel:
     """
@@ -26,6 +26,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            from .__init__ import FileStorage
             storage.new(self)
      
     def __str__(self):
@@ -40,6 +41,7 @@ class BaseModel:
         """
         self.updated_at = datetime.now()
         self.__dict__.update({"updated_at": datetime.now()})
+        from .__init__ import FileStorage
         storage.new(self)
         storage.save()
         
