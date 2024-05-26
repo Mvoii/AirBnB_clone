@@ -5,6 +5,7 @@ cmd console for the airbnb app
 import cmd
 from models.base_model import BaseModel
 from models.__init__ import storage
+import shlex
 
 class HBNBCommand(cmd.Cmd):
     """
