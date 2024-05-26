@@ -1,13 +1,13 @@
-.conatiner {
+.container {
     max-width: 1000px;
+    margin: auto;
     position: relative;
     margin-top: 30px;
     margin-bottom: 30px;
-    margin: auto;
 }
 
 .filters {
-    color: white;
+    background-color: white;
     height: 70px;
     width: 100%;
     border:1px solid #DDDDDD;
